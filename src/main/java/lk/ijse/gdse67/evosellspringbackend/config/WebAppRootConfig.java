@@ -1,6 +1,7 @@
 package lk.ijse.gdse67.evosellspringbackend.config;
 
 import jakarta.persistence.EntityManagerFactory;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,12 +12,14 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan(basePackages = "lk.ijse.gdse67.evosellspringbackend")
-@EnableJpaRepositories(basePackages = "lk.ijse.gdse67.evosellspringbackend")
+@EnableJpaRepositories(basePackages = "lk.ijse.gdse67.evosellspringbackend.dao")
+@EnableTransactionManagement
 public class WebAppRootConfig {
 
     @Bean
@@ -30,12 +33,12 @@ public class WebAppRootConfig {
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         HibernateJpaVendorAdapter vendorAdapter =new HibernateJpaVendorAdapter();
         vendorAdapter.setGenerateDdl(true);
         LocalContainerEntityManagerFactoryBean factoryBean =new LocalContainerEntityManagerFactoryBean();
         factoryBean.setJpaVendorAdapter(vendorAdapter);
-        factoryBean.setPackagesToScan("lk.ijse.gdse67.evosellspringbackend");
+        factoryBean.setPackagesToScan("lk.ijse.gdse67.evosellspringbackend.entity");
         factoryBean.setDataSource(dataSource());
         return factoryBean;
     }
@@ -45,5 +48,10 @@ public class WebAppRootConfig {
         JpaTransactionManager txManager = new JpaTransactionManager();
         txManager.setEntityManagerFactory(entityManagerFactory);
         return txManager;
+    }
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 }

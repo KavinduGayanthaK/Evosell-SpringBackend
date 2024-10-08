@@ -36,4 +36,16 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @PatchMapping(value = "/{gmail}" ,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updateUser(@PathVariable("gmail") String gmail,@RequestBody UserDTO userDTO) {
+        try{
+            userService.updateUser(gmail,userDTO);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (DataPersistException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

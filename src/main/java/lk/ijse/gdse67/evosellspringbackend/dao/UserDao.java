@@ -9,6 +9,9 @@ import java.util.Optional;
 
 @Repository
 public interface UserDao extends JpaRepository<UserEntity,String> {
-    @Query(value = "SELECT u FROM UserEntity  u WHERE u.gmail =?1")
-    public Optional<UserEntity> findByGmail(String gmail);
+    @Query(value = "SELECT u FROM UserEntity u WHERE u.gmail =?1")
+    Optional<UserEntity> findByGmail(String gmail);
+
+    @Query(value = "DELETE FROM UserEntity u WHERE u.gmail = ?1")
+    Optional<UserEntity> deleteByUser(String gmail);
 }

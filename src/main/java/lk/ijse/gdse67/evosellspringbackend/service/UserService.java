@@ -12,4 +12,6 @@ public interface UserService {
     List<UserDTO> getAllUsers();
 
     void updateUser(String gmail,UserDTO userDTO);
+
+    void deleteUser(String gmail);
 }

@@ -2,8 +2,8 @@ package lk.ijse.gdse67.evosellspringbackend.controller;
 
 import lk.ijse.gdse67.evosellspringbackend.dto.UserDTO;
 import lk.ijse.gdse67.evosellspringbackend.exception.DataPersistException;
+import lk.ijse.gdse67.evosellspringbackend.exception.UserNotFoundException;
 import lk.ijse.gdse67.evosellspringbackend.service.UserService;
-import lk.ijse.gdse67.evosellspringbackend.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -36,7 +36,7 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @PatchMapping(value = "/{gmail}" ,produces = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(value = "/{gmail}")
     public ResponseEntity<Void> updateUser(@PathVariable("gmail") String gmail,@RequestBody UserDTO userDTO) {
         try{
             userService.updateUser(gmail,userDTO);
@@ -48,4 +48,15 @@ public class UserController {
         }
     }
 
+    @DeleteMapping(value = "/{gmail}")
+    public ResponseEntity<Void> deleteUser(@PathVariable("gmail") String gmail) {
+        try {
+            userService.deleteUser(gmail);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (UserNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

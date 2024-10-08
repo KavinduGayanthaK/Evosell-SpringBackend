@@ -8,7 +8,6 @@ import lk.ijse.gdse67.evosellspringbackend.exception.UserNotFoundException;
 import lk.ijse.gdse67.evosellspringbackend.service.UserService;
 import lk.ijse.gdse67.evosellspringbackend.util.AppUtil;
 import lk.ijse.gdse67.evosellspringbackend.util.Mapping;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,17 +39,25 @@ public class UserServiceImpl implements UserService {
         return mapping.toUserDtoList(userDao.findAll());
     }
 
-
-
     @Override
     public void updateUser(String gmail, UserDTO userDTO) {
         Optional<UserEntity> tempUser = userDao.findByGmail(gmail);
         if (!tempUser.isPresent()) {
             throw new UserNotFoundException("User not found");
-        }else {
+        } else {
             tempUser.get().setUserName(userDTO.getUserName());
             tempUser.get().setPassword(userDTO.getPassword());
             tempUser.get().setGmail(userDTO.getGmail());
+        }
+    }
+
+    @Override
+    public void deleteUser(String gmail) {
+        Optional<UserEntity> existUser = userDao.findByGmail(gmail);
+        if (!existUser.isPresent()) {
+            throw new UserNotFoundException("User with gmail " + gmail + " not found");
+        } else {
+            userDao.deleteByUser(gmail);
         }
     }
 }

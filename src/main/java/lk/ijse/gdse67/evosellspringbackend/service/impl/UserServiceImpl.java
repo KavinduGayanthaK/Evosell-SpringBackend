@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
@@ -29,5 +31,10 @@ public class UserServiceImpl implements UserService {
         if (saveUser == null) {
             throw new DataPersistException("User not saved");
         }
+    }
+
+    @Override
+    public List<UserDTO> getAllUsers() {
+        return mapping.toUserDtoList(userDao.findAll());
     }
 }

@@ -14,10 +14,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "user")
 public class UserEntity implements SuperEntity{
-
+    @Id
     private String userId;
     private String userName;
-    @Id
     private String password;
     private String gmail;
 }

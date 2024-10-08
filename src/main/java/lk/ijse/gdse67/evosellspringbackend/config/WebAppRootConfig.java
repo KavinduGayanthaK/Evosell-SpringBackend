@@ -1,9 +1,23 @@
 package lk.ijse.gdse67.evosellspringbackend.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan(basePackages = "lk.ijse.gdse67.evosellspringbackend")
 public class WebAppRootConfig {
+
+    @Bean
+    public DataSource dataSource() {
+        DriverManagerDataSource dataSource =new DriverManagerDataSource();
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/evosellSpring?createDatabaseIfNotExist=true");
+        dataSource.setUsername("root");
+        dataSource.setPassword("ijse@1234");
+        return dataSource;
+    }
 }

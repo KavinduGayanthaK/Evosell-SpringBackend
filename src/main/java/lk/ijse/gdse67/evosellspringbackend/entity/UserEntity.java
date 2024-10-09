@@ -1,6 +1,5 @@
 package lk.ijse.gdse67.evosellspringbackend.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;

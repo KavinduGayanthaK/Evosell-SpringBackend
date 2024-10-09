@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
@@ -26,5 +28,10 @@ public class CustomerServiceImpl implements CustomerService {
        if (saveCustomer == null) {
            throw new DataPersistException("Customer not saved");
        }
+    }
+
+    @Override
+    public List<CustomerDTO> getAllCustomer() {
+        return mapping.toCustomerList(customerDao.findAll());
     }
 }

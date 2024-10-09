@@ -1,7 +1,9 @@
 package lk.ijse.gdse67.evosellspringbackend.service.impl;
 
+import lk.ijse.gdse67.evosellspringbackend.customStatusCode.SelectedCustomerErrorStatus;
 import lk.ijse.gdse67.evosellspringbackend.dao.CustomerDao;
-import lk.ijse.gdse67.evosellspringbackend.dto.CustomerDTO;
+import lk.ijse.gdse67.evosellspringbackend.dto.CustomerStatus;
+import lk.ijse.gdse67.evosellspringbackend.dto.impl.CustomerDTO;
 import lk.ijse.gdse67.evosellspringbackend.entity.impl.CustomerEntity;
 import lk.ijse.gdse67.evosellspringbackend.exception.DataPersistException;
 import lk.ijse.gdse67.evosellspringbackend.service.CustomerService;
@@ -33,5 +35,16 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<CustomerDTO> getAllCustomer() {
         return mapping.toCustomerList(customerDao.findAll());
+    }
+
+    @Override
+    public CustomerStatus getSelectedCustomer(String nicNumber) {
+        CustomerEntity customerEntity = customerDao.findByNic(nicNumber);
+        if (customerEntity == null) {
+            return new SelectedCustomerErrorStatus(1,"Customer nic with "+nicNumber+" not found");
+        }else {
+            return mapping.toCustomerDto(customerEntity);
+        }
+
     }
 }

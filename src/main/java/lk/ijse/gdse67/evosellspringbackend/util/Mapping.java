@@ -1,7 +1,7 @@
 package lk.ijse.gdse67.evosellspringbackend.util;
 
-import lk.ijse.gdse67.evosellspringbackend.dto.CustomerDTO;
-import lk.ijse.gdse67.evosellspringbackend.dto.UserDTO;
+import lk.ijse.gdse67.evosellspringbackend.dto.impl.CustomerDTO;
+import lk.ijse.gdse67.evosellspringbackend.dto.impl.UserDTO;
 import lk.ijse.gdse67.evosellspringbackend.entity.UserEntity;
 import lk.ijse.gdse67.evosellspringbackend.entity.impl.CustomerEntity;
 import org.modelmapper.ModelMapper;

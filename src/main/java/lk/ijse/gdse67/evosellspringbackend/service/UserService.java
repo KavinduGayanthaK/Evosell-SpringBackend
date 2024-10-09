@@ -1,8 +1,6 @@
 package lk.ijse.gdse67.evosellspringbackend.service;
 
-import lk.ijse.gdse67.evosellspringbackend.dto.UserDTO;
-import lk.ijse.gdse67.evosellspringbackend.entity.UserEntity;
-import org.springframework.data.jpa.repository.Query;
+import lk.ijse.gdse67.evosellspringbackend.dto.impl.UserDTO;
 
 import java.util.List;
 

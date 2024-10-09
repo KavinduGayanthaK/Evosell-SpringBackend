@@ -1,7 +1,6 @@
 package lk.ijse.gdse67.evosellspringbackend.controller;
 
-import lk.ijse.gdse67.evosellspringbackend.dto.CustomerDTO;
-import lk.ijse.gdse67.evosellspringbackend.dto.UserDTO;
+import lk.ijse.gdse67.evosellspringbackend.dto.impl.CustomerDTO;
 import lk.ijse.gdse67.evosellspringbackend.exception.DataPersistException;
 import lk.ijse.gdse67.evosellspringbackend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +33,10 @@ public class CustomerController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CustomerDTO> getAllCustomer() {
         return customerService.getAllCustomer();
+    }
+
+    @GetMapping(value = "/{nicNumber}" ,produces = MediaType.APPLICATION_JSON_VALUE)
+    public CustomerDTO getSelectedCustomer(@PathVariable("nicNumber") String nicNumber) {
+        return customerService.getSelectedCustomer(nicNumber);
     }
 }

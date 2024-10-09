@@ -1,4 +1,4 @@
-package lk.ijse.gdse67.evosellspringbackend.dto;
+package lk.ijse.gdse67.evosellspringbackend.dto.impl;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

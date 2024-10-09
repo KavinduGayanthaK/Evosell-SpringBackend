@@ -1,7 +1,7 @@
 package lk.ijse.gdse67.evosellspringbackend.service.impl;
 
 import lk.ijse.gdse67.evosellspringbackend.dao.UserDao;
-import lk.ijse.gdse67.evosellspringbackend.dto.UserDTO;
+import lk.ijse.gdse67.evosellspringbackend.dto.impl.UserDTO;
 import lk.ijse.gdse67.evosellspringbackend.entity.UserEntity;
 import lk.ijse.gdse67.evosellspringbackend.exception.DataPersistException;
 import lk.ijse.gdse67.evosellspringbackend.exception.UserNotFoundException;

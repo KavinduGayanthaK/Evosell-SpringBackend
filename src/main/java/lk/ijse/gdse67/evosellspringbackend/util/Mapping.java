@@ -1,7 +1,9 @@
 package lk.ijse.gdse67.evosellspringbackend.util;
 
+import lk.ijse.gdse67.evosellspringbackend.dto.CustomerDTO;
 import lk.ijse.gdse67.evosellspringbackend.dto.UserDTO;
 import lk.ijse.gdse67.evosellspringbackend.entity.UserEntity;
+import lk.ijse.gdse67.evosellspringbackend.entity.impl.CustomerEntity;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +29,16 @@ public class Mapping {
         return modelMapper.map(userEntities,new TypeToken<List<UserDTO>>() {}.getType());
     }
 
+    public CustomerEntity toCustomerEntity(CustomerDTO customerDTO) {
+        return modelMapper.map(customerDTO,CustomerEntity.class);
+    }
+
+    public CustomerDTO toCustomerDto(CustomerEntity customerEntity) {
+        return modelMapper.map(customerEntity, CustomerDTO.class);
+    }
+
+    public List<CustomerDTO> toCustomerList(List<CustomerEntity> customerEntities) {
+        return modelMapper.map(customerEntities,new TypeToken<List<CustomerDTO>>() {}.getType());
+    }
 
 }

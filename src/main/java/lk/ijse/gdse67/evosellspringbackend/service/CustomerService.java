@@ -11,4 +11,6 @@ public interface CustomerService {
     List<CustomerDTO> getAllCustomer();
 
     CustomerStatus getSelectedCustomer(String nicNumber);
+
+    void updateCustomer(String nic,CustomerDTO customerDTO);
 }

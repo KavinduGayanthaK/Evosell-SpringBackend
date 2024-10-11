@@ -1,5 +1,6 @@
 package lk.ijse.gdse67.evosellspringbackend.controller;
 
+import lk.ijse.gdse67.evosellspringbackend.dto.CustomerStatus;
 import lk.ijse.gdse67.evosellspringbackend.dto.impl.CustomerDTO;
 import lk.ijse.gdse67.evosellspringbackend.exception.DataPersistException;
 import lk.ijse.gdse67.evosellspringbackend.service.CustomerService;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/custo")
+@RequestMapping("api/v1/customer")
 public class CustomerController {
 
     @Autowired
@@ -36,7 +37,19 @@ public class CustomerController {
     }
 
     @GetMapping(value = "/{nicNumber}" ,produces = MediaType.APPLICATION_JSON_VALUE)
-    public CustomerDTO getSelectedCustomer(@PathVariable("nicNumber") String nicNumber) {
+    public CustomerStatus getSelectedCustomer(@PathVariable("nicNumber") String nicNumber) {
         return customerService.getSelectedCustomer(nicNumber);
+    }
+
+    @PatchMapping(value = "/{nic}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updateCustomer(@PathVariable("nic") String nic,@RequestBody CustomerDTO customerDTO) {
+        try{
+            customerService.updateCustomer(nic,customerDTO);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (DataPersistException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

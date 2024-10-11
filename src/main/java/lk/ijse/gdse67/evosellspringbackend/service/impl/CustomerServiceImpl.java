@@ -5,6 +5,7 @@ import lk.ijse.gdse67.evosellspringbackend.dao.CustomerDao;
 import lk.ijse.gdse67.evosellspringbackend.dto.CustomerStatus;
 import lk.ijse.gdse67.evosellspringbackend.dto.impl.CustomerDTO;
 import lk.ijse.gdse67.evosellspringbackend.entity.impl.CustomerEntity;
+import lk.ijse.gdse67.evosellspringbackend.exception.CustomerNotFoundException;
 import lk.ijse.gdse67.evosellspringbackend.exception.DataPersistException;
 import lk.ijse.gdse67.evosellspringbackend.service.CustomerService;
 import lk.ijse.gdse67.evosellspringbackend.util.AppUtil;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -45,6 +47,18 @@ public class CustomerServiceImpl implements CustomerService {
         }else {
             return mapping.toCustomerDto(customerEntity);
         }
+    }
 
+    @Override
+    public void updateCustomer(String nic, CustomerDTO customerDTO) {
+        Optional<CustomerEntity> tempCustomer = customerDao.findByNicNumber(nic);
+        if (!tempCustomer.isPresent()) {
+            throw new CustomerNotFoundException("Customer not found");
+        }else {
+            tempCustomer.get().setName(customerDTO.getName());
+            tempCustomer.get().setAddress(customerDTO.getAddress());
+            tempCustomer.get().setEmail(customerDTO.getEmail());
+            tempCustomer.get().setNic(customerDTO.getNic());
+        }
     }
 }

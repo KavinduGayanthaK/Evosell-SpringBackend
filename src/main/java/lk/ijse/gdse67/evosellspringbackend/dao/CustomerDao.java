@@ -9,5 +9,8 @@ import java.util.Optional;
 public interface CustomerDao extends JpaRepository<CustomerEntity,String> {
 
     @Query(value = "SELECT c FROM CustomerEntity c WHERE c.nic = ?1")
-   CustomerEntity findByNic(String nicNumber);
+    CustomerEntity findByNic(String nicNumber);
+
+    @Query(value = "SELECT c FROM CustomerEntity c WHERE c.nic = ?1")
+    Optional<CustomerEntity> findByNicNumber(String nic);
 }

@@ -13,4 +13,6 @@ public interface CustomerService {
     CustomerStatus getSelectedCustomer(String nicNumber);
 
     void updateCustomer(String nic,CustomerDTO customerDTO);
+
+    void deleteCustomer(String nic);
 }

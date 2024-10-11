@@ -61,4 +61,14 @@ public class CustomerServiceImpl implements CustomerService {
             tempCustomer.get().setNic(customerDTO.getNic());
         }
     }
+
+    @Override
+    public void deleteCustomer(String nic) {
+        Optional<CustomerEntity> existCustomer = customerDao.findByNicNumber(nic);
+        if (!existCustomer.isPresent()) {
+            throw new CustomerNotFoundException("Customer with nic "+nic+" not found");
+        }else {
+            customerDao.deleteCustomerByNic(nic);
+        }
+    }
 }

@@ -4,10 +4,12 @@ import lk.ijse.gdse67.evosellspringbackend.entity.impl.CustomerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@Repository
 public interface CustomerDao extends JpaRepository<CustomerEntity,String> {
 
     @Query(value = "SELECT c FROM CustomerEntity c WHERE c.nic = ?1")

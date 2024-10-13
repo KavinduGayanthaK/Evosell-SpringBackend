@@ -1,6 +1,6 @@
 package lk.ijse.gdse67.evosellspringbackend.dao;
 
-import lk.ijse.gdse67.evosellspringbackend.entity.UserEntity;
+import lk.ijse.gdse67.evosellspringbackend.entity.impl.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

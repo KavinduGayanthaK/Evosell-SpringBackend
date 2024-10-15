@@ -1,7 +1,9 @@
 package lk.ijse.gdse67.evosellspringbackend.util;
 
 import lk.ijse.gdse67.evosellspringbackend.dto.impl.CustomerDTO;
+import lk.ijse.gdse67.evosellspringbackend.dto.impl.ItemDTO;
 import lk.ijse.gdse67.evosellspringbackend.dto.impl.UserDTO;
+import lk.ijse.gdse67.evosellspringbackend.entity.impl.ItemEntity;
 import lk.ijse.gdse67.evosellspringbackend.entity.impl.UserEntity;
 import lk.ijse.gdse67.evosellspringbackend.entity.impl.CustomerEntity;
 import org.modelmapper.ModelMapper;
@@ -39,6 +41,18 @@ public class Mapping {
 
     public List<CustomerDTO> toCustomerList(List<CustomerEntity> customerEntities) {
         return modelMapper.map(customerEntities,new TypeToken<List<CustomerDTO>>() {}.getType());
+    }
+
+    public ItemEntity toItemEntity(ItemDTO itemDTO) {
+        return modelMapper.map(itemDTO, ItemEntity.class);
+    }
+
+    public ItemDTO toItemDto(ItemEntity itemEntity) {
+        return modelMapper.map(itemEntity, ItemDTO.class);
+    }
+
+    public List<ItemDTO> itemDTOList(List<ItemEntity> itemEntities) {
+        return modelMapper.map(itemEntities,new TypeToken<List<ItemDTO>>() {}.getType());
     }
 
 }

@@ -1,6 +1,8 @@
 package lk.ijse.gdse67.evosellspringbackend.service.impl;
 
+import lk.ijse.gdse67.evosellspringbackend.customStatusCode.SelectedItemErrorStatus;
 import lk.ijse.gdse67.evosellspringbackend.dao.ItemDao;
+import lk.ijse.gdse67.evosellspringbackend.dto.ItemStatus;
 import lk.ijse.gdse67.evosellspringbackend.dto.impl.ItemDTO;
 import lk.ijse.gdse67.evosellspringbackend.entity.impl.ItemEntity;
 import lk.ijse.gdse67.evosellspringbackend.exception.DataPersistException;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -33,5 +36,17 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemDTO> getAllItem() {
         return mapping.itemDTOList(itemDao.findAll());
+    }
+
+    @Override
+    public ItemStatus getSelectedItem(String itemCode) {
+        if (itemDao.existsById(itemCode)) {
+            ItemEntity itemEntity = itemDao.getReferenceById(itemCode);
+            return mapping.toItemDto(itemEntity);
+        }else {
+            return new SelectedItemErrorStatus(1,"Item with itemCode "+itemCode+" not found");
+        }
+
+
     }
 }

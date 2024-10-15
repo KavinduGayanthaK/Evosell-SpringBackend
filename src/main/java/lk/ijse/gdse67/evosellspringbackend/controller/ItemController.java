@@ -1,5 +1,6 @@
 package lk.ijse.gdse67.evosellspringbackend.controller;
 
+import lk.ijse.gdse67.evosellspringbackend.dto.ItemStatus;
 import lk.ijse.gdse67.evosellspringbackend.dto.impl.ItemDTO;
 import lk.ijse.gdse67.evosellspringbackend.exception.DataPersistException;
 import lk.ijse.gdse67.evosellspringbackend.service.ItemService;
@@ -33,6 +34,11 @@ public class ItemController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ItemDTO> getAllItem() {
        return itemService.getAllItem();
+    }
+
+    @GetMapping(value = "/{itemCode}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ItemStatus getSelectedItem(@PathVariable("itemCode") String itemCode) {
+        return itemService.getSelectedItem(itemCode);
     }
 
 }

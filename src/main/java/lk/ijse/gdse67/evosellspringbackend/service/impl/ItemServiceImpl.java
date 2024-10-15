@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class ItemServiceImpl implements ItemService {
@@ -26,5 +28,10 @@ public class ItemServiceImpl implements ItemService {
         if (save == null) {
             throw new DataPersistException("Item not saved");
         }
+    }
+
+    @Override
+    public List<ItemDTO> getAllItem() {
+        return mapping.itemDTOList(itemDao.findAll());
     }
 }

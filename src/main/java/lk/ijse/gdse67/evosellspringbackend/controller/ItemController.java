@@ -3,6 +3,7 @@ package lk.ijse.gdse67.evosellspringbackend.controller;
 import lk.ijse.gdse67.evosellspringbackend.dto.ItemStatus;
 import lk.ijse.gdse67.evosellspringbackend.dto.impl.ItemDTO;
 import lk.ijse.gdse67.evosellspringbackend.exception.DataPersistException;
+import lk.ijse.gdse67.evosellspringbackend.exception.ItemNotFoundException;
 import lk.ijse.gdse67.evosellspringbackend.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,6 +49,18 @@ public class ItemController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }catch (DataPersistException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping(value = "/{itemCode}" ,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> deleteItem(@PathVariable("itemCode") String itemCode) {
+        try {
+            itemService.deleteItem(itemCode);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (ItemNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

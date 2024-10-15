@@ -10,4 +10,5 @@ public interface ItemService {
     List<ItemDTO> getAllItem();
     ItemStatus getSelectedItem(String itemCode);
     void updateItem(String itemCode,ItemDTO itemDTO);
+    void deleteItem(String itemCode);
 }

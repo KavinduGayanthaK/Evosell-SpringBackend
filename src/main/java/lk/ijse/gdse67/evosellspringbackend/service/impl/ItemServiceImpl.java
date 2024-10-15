@@ -5,6 +5,7 @@ import lk.ijse.gdse67.evosellspringbackend.dao.ItemDao;
 import lk.ijse.gdse67.evosellspringbackend.dto.ItemStatus;
 import lk.ijse.gdse67.evosellspringbackend.dto.impl.ItemDTO;
 import lk.ijse.gdse67.evosellspringbackend.entity.impl.ItemEntity;
+import lk.ijse.gdse67.evosellspringbackend.exception.CustomerNotFoundException;
 import lk.ijse.gdse67.evosellspringbackend.exception.DataPersistException;
 import lk.ijse.gdse67.evosellspringbackend.exception.ItemNotFoundException;
 import lk.ijse.gdse67.evosellspringbackend.service.ItemService;
@@ -47,8 +48,6 @@ public class ItemServiceImpl implements ItemService {
         }else {
             return new SelectedItemErrorStatus(1,"Item with itemCode "+itemCode+" not found");
         }
-
-
     }
 
     @Override
@@ -61,6 +60,16 @@ public class ItemServiceImpl implements ItemService {
             tempItem.get().setName(itemDTO.getName());
             tempItem.get().setQuantityOnHand(itemDTO.getQuantityOnHand());
             tempItem.get().setPrice(itemDTO.getPrice());
+        }
+    }
+
+    @Override
+    public void deleteItem(String itemCode) {
+        Optional<ItemEntity> existItem = itemDao.findById(itemCode);
+        if (!existItem.isPresent()) {
+            throw new CustomerNotFoundException("Item with code " + itemCode + " not found");
+        } else {
+            itemDao.deleteById(itemCode);
         }
     }
 }

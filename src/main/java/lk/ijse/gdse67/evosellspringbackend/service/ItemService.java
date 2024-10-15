@@ -9,4 +9,5 @@ public interface ItemService {
     void saveItem(ItemDTO itemDTO);
     List<ItemDTO> getAllItem();
     ItemStatus getSelectedItem(String itemCode);
+    void updateItem(String itemCode,ItemDTO itemDTO);
 }

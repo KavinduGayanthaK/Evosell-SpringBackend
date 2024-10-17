@@ -7,4 +7,7 @@ public class AppUtil {
         return "USER-"+UUID.randomUUID();
     }
     public static String generateCustomerId() { return "CUSTOMER-"+UUID.randomUUID();}
+    public static String generateOrderDetailId(){
+        return "ORDER_DETAIL-" + UUID.randomUUID();
+    }
 }

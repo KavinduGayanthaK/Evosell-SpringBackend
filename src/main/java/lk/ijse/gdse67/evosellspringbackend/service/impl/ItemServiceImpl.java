@@ -57,9 +57,9 @@ public class ItemServiceImpl implements ItemService {
             throw new ItemNotFoundException("Item with code "+itemCode+" not found");
         }else {
             tempItem.get().setItemCode(itemDTO.getItemCode());
-            tempItem.get().setName(itemDTO.getName());
-            tempItem.get().setQuantityOnHand(itemDTO.getQuantityOnHand());
-            tempItem.get().setPrice(itemDTO.getPrice());
+            tempItem.get().setItemName(itemDTO.getItemName());
+            tempItem.get().setQTYOnHand(itemDTO.getQTYOnHand());
+            tempItem.get().setUnitPrice(itemDTO.getUnitPrice());
         }
     }
 

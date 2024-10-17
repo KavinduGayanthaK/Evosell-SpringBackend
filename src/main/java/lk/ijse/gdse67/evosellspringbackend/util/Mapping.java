@@ -1,11 +1,7 @@
 package lk.ijse.gdse67.evosellspringbackend.util;
 
-import lk.ijse.gdse67.evosellspringbackend.dto.impl.CustomerDTO;
-import lk.ijse.gdse67.evosellspringbackend.dto.impl.ItemDTO;
-import lk.ijse.gdse67.evosellspringbackend.dto.impl.UserDTO;
-import lk.ijse.gdse67.evosellspringbackend.entity.impl.ItemEntity;
-import lk.ijse.gdse67.evosellspringbackend.entity.impl.UserEntity;
-import lk.ijse.gdse67.evosellspringbackend.entity.impl.CustomerEntity;
+import lk.ijse.gdse67.evosellspringbackend.dto.impl.*;
+import lk.ijse.gdse67.evosellspringbackend.entity.impl.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +50,21 @@ public class Mapping {
     public List<ItemDTO> itemDTOList(List<ItemEntity> itemEntities) {
         return modelMapper.map(itemEntities,new TypeToken<List<ItemDTO>>() {}.getType());
     }
+    public OrderEntity toOrderEntity(OrderDTO orderDTO) {
+        return modelMapper.map(orderDTO, OrderEntity.class);
+    }
+    public OrderDTO toOrderDTO(OrderEntity orderEntity){
+        return modelMapper.map(orderEntity,OrderDTO.class);
+    }
+    public List<OrderDTO> toOrderList(List<OrderEntity> orderList){
+        return modelMapper.map(orderList,new TypeToken<List<OrderDTO>>(){}.getType());
+    }
+    public List<OrderDetailsEntity> toOrderEntityList(List<OrderDetailsDTO> orderList){
+        return modelMapper.map(orderList,new TypeToken<List<OrderDetailsEntity>>(){}.getType());
+    }
+    public OrderDetailsEntity toOrderDetailEntity(OrderDetailsDTO orderDetailDTO) {
+        return modelMapper.map(orderDetailDTO, OrderDetailsEntity.class);
+    }
+
 
 }

@@ -1,9 +1,6 @@
 package lk.ijse.gdse67.evosellspringbackend.entity.impl;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lk.ijse.gdse67.evosellspringbackend.entity.SuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +20,6 @@ public class CustomerEntity implements SuperEntity {
     private String address;
     private String email;
     private String nic;
-    @OneToMany(mappedBy = "customerNic")
-    private List<OrderEntity> orders;
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    private List<OrderEntity> orderList;
 }

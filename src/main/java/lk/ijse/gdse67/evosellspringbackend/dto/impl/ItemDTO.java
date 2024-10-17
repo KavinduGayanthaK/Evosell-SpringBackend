@@ -5,12 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class ItemDTO implements ItemStatus {
     private String itemCode;
-    private String name;
-    private int quantityOnHand;
-    private double price;
+    private String itemName;
+    private int QTYOnHand;
+    private double unitPrice;
+    private List<OrderDetailsDTO> orderList;
 }

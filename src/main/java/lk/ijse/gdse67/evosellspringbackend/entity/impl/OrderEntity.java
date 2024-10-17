@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -13,10 +15,15 @@ import lombok.NoArgsConstructor;
 @Table(name = "orders")
 public class OrderEntity implements SuperEntity {
     @Id
-    private String orderId;
-    @ManyToOne
-    @JoinColumn(name= "customerNic",nullable = false)
-    private CustomerEntity customerNic;
-    private String customerName;
-
+    private String orderID;
+    private String date;
+    private double discountRate;
+    private double discount;
+    private double subTotal;
+    private double balance;
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "customerId")
+    private CustomerEntity customer;
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
+    private List<OrderDetailsEntity> orderDetailsList;
 }
